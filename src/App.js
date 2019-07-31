@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import "./App.css";
+import { database } from "./firebase/firebase";
 
-const App = () => (
-  <React.StrictMode>
-    <div className="App">
-      <header>
-        <h2>React and Firebase App</h2>
-      </header>
-    </div>
-  </React.StrictMode>
-);
+import "./css/App.css";
+
+const App = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    database.ref().on("value", snapshot => {
+      setData(snapshot.val());
+    });
+  });
+
+  return (
+    <React.StrictMode>
+      <div className="App">
+        <header>
+          <h1>React and Firebase App</h1>
+        </header>
+        <main>
+          <h2>{data}</h2>
+        </main>
+      </div>
+    </React.StrictMode>
+  );
+};
 
 export default App;
