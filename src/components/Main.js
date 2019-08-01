@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { css } from "@emotion/core";
 
@@ -11,17 +11,22 @@ const Main = () => {
   const [data, setData] = useState(null);
   const [formValue, setFormValue] = useState("");
 
+  let dataRef = useRef(null);
+
   useEffect(() => {
-    database.ref().on("value", snapshot => {
+    dataRef.current = database.ref("/formValue");
+
+    dataRef.current.on("value", snapshot => {
       setData(snapshot.val());
     });
   }, []);
 
   const handleFormSubmit = () => {
-    database
-      .ref()
-      .child("formValue")
-      .set(formValue);
+    const value = formValue.trim();
+    if (value) {
+      dataRef.current.push(value);
+      setFormValue("");
+    }
   };
 
   return (
