@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { css } from "@emotion/core";
+import { css } from '@emotion/core';
 
 const Header = () => (
   <header
@@ -11,7 +11,7 @@ const Header = () => (
       text-align: center;
     `}
   >
-    <h1>React and Firebase App</h1>
+    <h1>Lunch Rush</h1>
   </header>
 );
 

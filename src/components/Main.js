@@ -1,34 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from 'react';
 
-import { css } from "@emotion/core";
+import { css } from '@emotion/core';
 
-import { database } from "../firebase/firebase";
-
-import Form from "./Form";
-import DBContainer from "./DBContainer";
+import { database } from '../firebase/firebase';
+import SignIn from './SignIn';
 
 const Main = () => {
-  const [data, setData] = useState(null);
-  const [formValue, setFormValue] = useState("");
-
-  let dataRef = useRef(null);
-
-  useEffect(() => {
-    dataRef.current = database.ref("/formValue");
-
-    dataRef.current.on("value", snapshot => {
-      setData(snapshot.val());
-    });
-  }, []);
-
-  const handleFormSubmit = () => {
-    const value = formValue.trim();
-    if (value) {
-      dataRef.current.push(value);
-      setFormValue("");
-    }
-  };
-
   return (
     <main
       css={css`
@@ -37,12 +14,7 @@ const Main = () => {
         padding: 15px;
       `}
     >
-      <DBContainer data={data} />
-      <Form
-        value={formValue}
-        handleChange={setFormValue}
-        handleSubmit={handleFormSubmit}
-      />
+      <SignIn />
     </main>
   );
 };
