@@ -2,8 +2,7 @@ import React from 'react';
 
 import { css } from '@emotion/core';
 
-import { database } from '../firebase/firebase';
-import SignIn from './SignIn';
+import Auth from './Auth';
 
 const Main = () => {
   return (
@@ -14,7 +13,7 @@ const Main = () => {
         padding: 15px;
       `}
     >
-      <SignIn />
+      <Auth />
     </main>
   );
 };
