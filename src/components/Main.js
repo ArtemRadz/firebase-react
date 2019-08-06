@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { css } from '@emotion/core';
+
+import { database } from '../firebase/firebase';
 
 import Auth from './Auth';
 import User from './User';
 import Form from './Form';
+import Restaurants from './Restaurants';
 
 const Main = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loadingState, setLoadingState] = useState(true);
+  const [restaurants, setRestaurants] = useState(null);
+
+  const restaurantRef = useRef(database.ref('/restaurants'));
+
+  useEffect(() => {
+    restaurantRef.current.on('value', restaurants => {
+      setRestaurants(restaurants.val());
+    });
+  }, []);
 
   return (
     <main
@@ -23,6 +35,7 @@ const Main = () => {
         <>
           <User user={currentUser} />
           <Form />
+          {restaurants && <Restaurants restaurants={restaurants} />}
         </>
       ) : (
         <Auth
