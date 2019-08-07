@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import { css } from '@emotion/core';
 
-import { database } from '../firebase/firebase';
+import { auth, database } from '../firebase/firebase';
 
 import Auth from './Auth';
 import User from './User';
@@ -11,14 +11,19 @@ import Restaurants from './Restaurants';
 
 const Main = () => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [loadingState, setLoadingState] = useState(true);
   const [restaurants, setRestaurants] = useState(null);
+  const [loadingState, setLoadingState] = useState(true);
 
-  const restaurantRef = useRef(database.ref('/restaurants'));
+  const restaurantRef = useRef(null);
 
   useEffect(() => {
-    restaurantRef.current.on('value', restaurants => {
-      setRestaurants(restaurants.val());
+    auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+      setLoadingState(false);
+      restaurantRef.current = database.ref('restaurants');
+      restaurantRef.current.on('value', restaurants => {
+        setRestaurants(restaurants.val());
+      });
     });
   }, []);
 
@@ -33,16 +38,12 @@ const Main = () => {
       {loadingState && <p>Loading...</p>}
       {currentUser ? (
         <>
-          <User user={currentUser} />
-          <Form />
+          <User {...currentUser} />
+          <Form restaurantRef={restaurantRef} />
           {restaurants && <Restaurants restaurants={restaurants} />}
         </>
       ) : (
-        <Auth
-          loadingState={loadingState}
-          onAuthStateChanged={setCurrentUser}
-          handleLoadingState={setLoadingState}
-        />
+        <Auth loadingState={loadingState} />
       )}
     </main>
   );

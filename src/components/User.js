@@ -6,7 +6,9 @@ import PropTypes from 'prop-types';
 import { auth } from '../firebase/firebase';
 import Button from './Button';
 
-const User = ({ user }) => {
+const User = ({ photoURL, displayName, email }) => {
+  const handleSignOut = () => auth.signOut();
+
   return (
     <div
       css={css`
@@ -19,29 +21,26 @@ const User = ({ user }) => {
           max-width: 150px;
           height: auto;
         `}
-        src={user.photoURL}
-        alt={`${user.displayName}`}
+        src={photoURL}
+        alt={`${displayName}`}
       ></img>
       <div
         css={css`
           padding: 15px;
         `}
       >
-        <p>{user.displayName}</p>
-        <p>{user.email}</p>
-        <Button title={'Sign Out'} handleClick={() => auth.signOut()} />
+        <p>{displayName}</p>
+        <p>{email}</p>
+        <Button title={'Sign Out'} handleClick={handleSignOut} />
       </div>
     </div>
   );
 };
 
 User.propTypes = {
-  user: PropTypes.shape({
-    displayName: PropTypes.string,
-    email: PropTypes.string.isRequired,
-    photoURL: PropTypes.string,
-    uid: PropTypes.string.isRequired
-  }).isRequired
+  displayName: PropTypes.string,
+  email: PropTypes.string.isRequired,
+  photoURL: PropTypes.string
 };
 
 export default User;

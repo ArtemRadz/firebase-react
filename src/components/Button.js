@@ -22,7 +22,7 @@ const Button = ({ title, disabled = false, handleClick }) => {
       disabled={disabled}
       onClick={event => {
         event.preventDefault();
-        handleClick();
+        handleClick(event);
       }}
     >
       {title}

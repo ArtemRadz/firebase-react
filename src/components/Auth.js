@@ -1,24 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { auth, googleAuthProvider } from '../firebase/firebase';
+
 import Button from './Button';
 
-const Auth = ({ loadingState, onAuthStateChanged, handleLoadingState }) => {
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      handleLoadingState(false);
-      onAuthStateChanged(user);
-    });
-  }, []);
+const Auth = ({ loadingState }) => {
+  const handleSignIn = () => auth.signInWithPopup(googleAuthProvider);
 
   return (
     <>
-      {!loadingState && (
-        <Button
-          title={'Sign In'}
-          handleClick={() => auth.signInWithPopup(googleAuthProvider)}
-        />
-      )}
+      {!loadingState && <Button title={'Sign In'} handleClick={handleSignIn} />}
     </>
   );
 };

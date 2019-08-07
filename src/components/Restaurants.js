@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import Restaurant from './Restaurant';
 
 const Restaurants = ({ restaurants }) => (
@@ -9,5 +11,11 @@ const Restaurants = ({ restaurants }) => (
     ))}
   </>
 );
+
+Restaurants.propTypes = {
+  restaurants: PropTypes.shape({
+    name: PropTypes.string
+  }).isRequired
+};
 
 export default Restaurants;
