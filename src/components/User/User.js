@@ -7,8 +7,9 @@ import Button from '../Button/Button';
 
 import './User.css';
 
-const User = ({ photoURL, displayName, email }) => {
+const User = ({ user }) => {
   const handleSignOut = () => auth.signOut();
+  const { photoURL, displayName, email } = user;
 
   return (
     <div id="user">
@@ -23,9 +24,11 @@ const User = ({ photoURL, displayName, email }) => {
 };
 
 User.propTypes = {
-  displayName: PropTypes.string,
-  email: PropTypes.string.isRequired,
-  photoURL: PropTypes.string
+  user: PropTypes.shape({
+    displayName: PropTypes.string,
+    email: PropTypes.string.isRequired,
+    photoURL: PropTypes.string
+  }).isRequired
 };
 
 export default User;

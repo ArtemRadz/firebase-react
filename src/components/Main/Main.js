@@ -32,9 +32,15 @@ const Main = () => {
       {loadingState && <p>Loading...</p>}
       {currentUser ? (
         <>
-          <User {...currentUser} />
+          <User user={currentUser} />
           <Form restaurantRef={restaurantRef} />
-          {restaurants && <Restaurants restaurants={restaurants} />}
+          {restaurants && (
+            <Restaurants
+              restaurants={restaurants}
+              user={currentUser}
+              restaurantRef={restaurantRef}
+            />
+          )}
         </>
       ) : (
         <Auth loadingState={loadingState} />
