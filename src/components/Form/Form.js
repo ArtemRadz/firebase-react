@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-import { css } from '@emotion/core';
 import PropTypes from 'prop-types';
 
-import Button from './Button';
-import Input from './Input';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
+
+import './Form.css';
 
 const Form = ({ restaurantRef }) => {
   const [name, setName] = useState('');
@@ -28,11 +29,7 @@ const Form = ({ restaurantRef }) => {
   };
 
   return (
-    <form
-      css={css`
-        margin: 15px 0;
-      `}
-    >
+    <form id="form-component">
       <Input value={name} handleChange={handleInput} />
       <Button title={'Submit'} disabled={!name} handleClick={handleSubmit} />
       <p>{message}</p>

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { css } from '@emotion/core';
+import { auth, database } from '../../firebase/firebase';
 
-import { auth, database } from '../firebase/firebase';
+import Auth from '../Auth/Auth';
+import User from '../User/User';
+import Form from '../Form/Form';
+import Restaurants from '../Restaurants/Restaurants';
 
-import Auth from './Auth';
-import User from './User';
-import Form from './Form';
-import Restaurants from './Restaurants';
+import './Main.css';
 
 const Main = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -28,13 +28,7 @@ const Main = () => {
   }, []);
 
   return (
-    <main
-      css={css`
-        background-color: #19212b;
-        color: #4fc3f7;
-        padding: 15px;
-      `}
-    >
+    <main id="main-component">
       {loadingState && <p>Loading...</p>}
       {currentUser ? (
         <>

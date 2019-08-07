@@ -1,24 +1,13 @@
 import React from 'react';
 
-import { css } from '@emotion/core';
 import PropTypes from 'prop-types';
+
+import './button.css';
 
 const Button = ({ title, disabled = false, handleClick }) => {
   return (
     <button
-      css={css`
-        color: #fff;
-        padding: 0 15px;
-        height: 30px;
-        border: 0;
-        border-radius: 8px;
-        background-color: #039be5;
-        font-size: 14px;
-        cursor: pointer;
-        &:disabled {
-          opacity: 0.5;
-        }
-      `}
+      id="button-component"
       disabled={disabled}
       onClick={event => {
         event.preventDefault();

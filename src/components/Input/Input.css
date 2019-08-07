@@ -1,0 +1,23 @@
+#input-component {
+  border: 0;
+  padding: 0 5px;
+  border-radius: 8px;
+  background-color: #039be5;
+  color: #fff;
+  font-size: 14px;
+  height: 30px;
+  width: 140px;
+}
+
+#input-component::-webkit-input-placeholder {
+  color: #fff;
+}
+#input-component::-moz-placeholder {
+  color: #fff;
+}
+#input-component:-ms-input-placeholder {
+  color: #fff;
+}
+#input-component:-moz-placeholder {
+  color: #fff;
+}
