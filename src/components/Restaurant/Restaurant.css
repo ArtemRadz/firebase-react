@@ -1,0 +1,22 @@
+#restaurant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: #039be5;
+}
+
+#restaurant h3 {
+  color: #fff;
+  margin: 0;
+}
+
+#restaurant ul {
+  list-style-type: none;
+  padding: 0;
+  color: #19212b;
+}
+
+#restaurant #button-component {
+  background-color: #f5820b;
+}

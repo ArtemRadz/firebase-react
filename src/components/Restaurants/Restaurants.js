@@ -25,9 +25,10 @@ const Restaurants = ({ restaurants, user, restaurantRef }) => {
   };
 
   return (
-    <section id="restaurants">
-      {Object.entries(restaurants).map(([key, restaurant]) => {
-        return (
+    <>
+      <h2 className="restaurants-title">Restaurants</h2>
+      <section id="restaurants">
+        {Object.entries(restaurants).map(([key, restaurant]) => (
           <Restaurant
             key={key}
             userUID={uid}
@@ -35,9 +36,9 @@ const Restaurants = ({ restaurants, user, restaurantRef }) => {
             handleSelect={() => handleSelect(key)}
             handleDeselect={() => handleDeselect(key)}
           />
-        );
-      })}
-    </section>
+        ))}
+      </section>
+    </>
   );
 };
 

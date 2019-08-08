@@ -1,4 +1,4 @@
-#input-component {
+.input-component {
   border: 0;
   padding: 0 5px;
   border-radius: 8px;
@@ -7,17 +7,18 @@
   font-size: 14px;
   height: 30px;
   width: 140px;
+  margin-left: 15px;
 }
 
-#input-component::-webkit-input-placeholder {
+.input-componentt::-webkit-input-placeholder {
   color: #fff;
 }
-#input-component::-moz-placeholder {
+.input-component::-moz-placeholder {
   color: #fff;
 }
-#input-component:-ms-input-placeholder {
+.input-component:-ms-input-placeholder {
   color: #fff;
 }
-#input-component:-moz-placeholder {
+.input-component:-moz-placeholder {
   color: #fff;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -12,25 +12,29 @@ const Form = ({ restaurantRef }) => {
   const [message, setMessage] = useState(null);
 
   const handleInput = event => setName(event.target.value);
+  let timeoutID = useRef(null);
 
   const handleSubmit = () => {
     restaurantRef.current
       .push({ name })
       .then(() => {
+        clearTimeout(timeoutID.current);
         setName('');
-        setMessage('Item added');
+        setMessage(`Restaurant '${name}' added`);
       })
       .catch(error => {
-        setMessage(`Item not added. Message error: ${error}`);
+        clearTimeout(timeoutID.current);
+        setMessage(`Restaurant '${name}' not added. Message error: ${error}`);
       })
       .finally(() => {
-        setTimeout(() => setMessage(''), 3000);
+        timeoutID.current = setTimeout(() => setMessage(''), 3000);
       });
   };
 
   return (
     <form id="form-component">
-      <Input value={name} handleChange={handleInput} />
+      <p>Add new restaurant</p>
+      <Input label="Restaurant name" value={name} handleChange={handleInput} />
       <Button title={'Submit'} disabled={!name} handleClick={handleSubmit} />
       <p>{message}</p>
     </form>
